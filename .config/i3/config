@@ -41,6 +41,8 @@ bindsym $mod+d exec rofi -modi drun -show drun\
 	-font		"System San Francisco Display 10"\
 	-bg		"#2f343f" -fg 	"#f3f4f5"\
 	-hlbg		"#5294e2" -hlfg "#f3f4f5"
+
+
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
