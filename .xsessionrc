@@ -1,3 +1,0 @@
-if [ -d "$HOME/Applications" ] ; then
-    PATH="$HOME/Applications/.bin:$PATH"
-fi
