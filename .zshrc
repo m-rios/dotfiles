@@ -141,8 +141,7 @@ export HOSTALIASES=~/.hosts
 export KOPS_BUCKET_NAME=cluster.dev.swapit.ga
 export KOPS_STATE_STORE=s3://${KOPS_BUCKET_NAME}
 export KOPS_CLUSTER_NAME=dev.swapit.ga
-export AWS_ACCESS_KEY=AKIAJ3H7A4QFQ5SQGP5A
-export AWS_SECRET_KEY=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
+source .config/zsh/aws.sh
 
 permakill() {
     while true; do krmpo $1; done;
