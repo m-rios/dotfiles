@@ -104,8 +104,8 @@ helmdel() {
 }
 
 # Custom Aliases 
-alias python=python3
-alias pip=pip3
+# alias python=python3
+# alias pip=pip3
 alias venvc='virtualenv .venv'
 alias venva='source .venv/bin/activate'
 alias vimr="open -a VimR"

@@ -3,8 +3,8 @@ autocmd! bufwritepost ~/.vim/vimrc source %
 
 
 " easier moving between tabs
-map <Leader>h <esc>:tabprevious<CR>
-map <Leader>l <esc>:tabnext<CR>
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
 
 
 " map sort function to a key
@@ -18,8 +18,9 @@ autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
 au InsertLeave * match ExtraWhitespace /\s\+$/
 
 
-" Split to the right
+" Split to the right and bottom
 set splitright
+set splitbelow
 
 
 " Enable syntax highlighting
@@ -95,14 +96,11 @@ vnoremap < <gv
 vnoremap > >gv
 
 
-" cmd + / to comment
-"xnoremap <C-/> gc
-
 call plug#begin('~/.vim/plugged')
 
 "Plug 'stevearc/vim-arduino'
-"Plug 'tpope/vim-sensible'
-"Plug 'tpope/commentary' " There must be an issue with key bindings for this
+" Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-commentary' " There must be an issue with key bindings for this
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'davidhalter/jedi-vim'
@@ -114,22 +112,22 @@ Plug 'nightsense/cosmic_latte'
 
 call plug#end()
 
+" toggle comment
+map C gcc
 
 " Color scheme
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 set t_Co=256
 "colorscheme archery
 colorscheme cosmic_latte
-let g:airline_theme = 'cosmic_latte_dark'
+
+" let g:airline_theme = 'cosmic_latte_dark'
 
 
 " ============================================================================
 " Python IDE Setup
 " ============================================================================
 
-
-" For python-folding script
-set nofoldenable
 
 " vim-powerline
 set laststatus=2
@@ -151,3 +149,28 @@ let g:jedi#usages_command = "<leader>z"
 let g:jedi#popup_on_dot = 0
 let g:jedi#popup_select_first = 0
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+
+
+" Better navigating through omnicomplete option list
+" See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
+set completeopt=longest,menuone
+function! OmniPopup(action)
+    if pumvisible()
+        if a:action == 'j'
+            return "\<C-N>"
+        elseif a:action == 'k'
+            return "\<C-P>"
+        endif
+    endif
+    return a:action
+endfunction
+
+
+inoremap <silent><C-j> <C-R>=OmniPopup('j')<CR>
+inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
+
+
+" Python folding
+" mkdir -p ~/.vim/ftplugin
+" wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
+set nofoldenable
