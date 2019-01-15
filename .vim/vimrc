@@ -1,5 +1,5 @@
 "" Source vimrc automatically
-autocmd! bufwritepost ~/.config/nvim/init.vim source %
+autocmd! bufwritepost ~/.vim/vimrc source %
 
 
 " easier moving between tabs
@@ -30,6 +30,7 @@ syntax on
 
 " Showing line numbers and length
 set number  " show line numbers
+set scrolloff=10 " center cursor vertically
 set tw=79   " width of document (used by gd)
 set nowrap  " don't automatically wrap on load
 set fo-=t   " don't automatically wrap text when typing
@@ -97,7 +98,7 @@ vnoremap > >gv
 " cmd + / to comment
 "xnoremap <C-/> gc
 
-call plug#begin('~/.config/nvim/plugged')
+call plug#begin('~/.vim/plugged')
 
 "Plug 'stevearc/vim-arduino'
 "Plug 'tpope/vim-sensible'
@@ -108,8 +109,19 @@ Plug 'davidhalter/jedi-vim'
 Plug 'kien/ctrlp.vim' " Fuzzy search
 "Plug 'Vigemus/nvimux'
 Plug 'vim-latex/vim-latex'
+Plug 'Badacadabra/vim-archery'
+Plug 'nightsense/cosmic_latte'
 
 call plug#end()
+
+
+" Color scheme
+" mkdir -p ~/.vim/colors && cd ~/.vim/colors
+set t_Co=256
+"colorscheme archery
+colorscheme cosmic_latte
+let g:airline_theme = 'cosmic_latte_dark'
+
 
 " ============================================================================
 " Python IDE Setup

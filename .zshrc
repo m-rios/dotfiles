@@ -113,10 +113,10 @@ alias vimr="open -a VimR"
 alias ssh-xubuntu='ssh mario@192.168.64.2'
 alias arduino='/Applications/Arduino.app/Contents/MacOS/Arduino'
 alias ard=arduino
-alias vim=nvim
+#alias vim=nvim
 alias src='source ~/.zshrc'
-alias vimrc='vim ~/.zshrc && src' # TODO: find the name of the shell and automate config filename
-alias nvimrc='vim ~/.config/nvim/init.vim' 
+alias zshrc='vim ~/.zshrc && src' # TODO: find the name of the shell and automate config filename
+alias vimrc='vim ~/.vim/vimrc' 
 alias rn=ranger
 alias sp=spotify
 alias ssh-stt='ssh -i ~/Developer/stt-entrypoint.pem ubuntu@ec2-18-196-186-182.eu-central-1.compute.amazonaws.com'
@@ -131,6 +131,8 @@ alias drmiall="docker rm $(docker ps -aq)"
 alias compose=docker-compose
 alias kgpolive="while sleep 1; do kgpo; done;"
 alias cdlatex="cd ~/Dropbox/Apps/Texpad/Master\ thesis/"
+alias peregrine="ssh s3485781@peregrine.hpc.rug.nl"
+alias rng="ranger"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 [ -f ~/.kubectl_aliases ] && source ~/.kubectl_aliases
 
@@ -141,7 +143,6 @@ export HOSTALIASES=~/.hosts
 export KOPS_BUCKET_NAME=cluster.dev.swapit.ga
 export KOPS_STATE_STORE=s3://${KOPS_BUCKET_NAME}
 export KOPS_CLUSTER_NAME=dev.swapit.ga
-source .config/zsh/aws.sh
 
 permakill() {
     while true; do krmpo $1; done;
@@ -149,4 +150,3 @@ permakill() {
 dbash() {
     docker exec -it $1 bash
 }
-alias ros="dbash msc-robai_ros_1"
