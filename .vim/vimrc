@@ -1,10 +1,16 @@
 "" Source vimrc automatically
 autocmd! bufwritepost ~/.vim/vimrc source %
 
+" command to edit vimrc
+command Vimrc e ~/.vim/vimrc
+
+" command to wrap lines to textwidth
+command Wrap set fo+=t  
 
 " easier moving between tabs
 map <Leader>n <esc>:tabprevious<CR>
 map <Leader>m <esc>:tabnext<CR>
+map <Leader>t <esc>:tabnew<CR>
 
 
 " map sort function to a key
@@ -25,7 +31,6 @@ set splitbelow
 
 " Enable syntax highlighting
 filetype off
-filetype plugin indent on
 syntax on
 
 
@@ -42,6 +47,7 @@ highlight ColorColumn ctermbg=233
 " Useful settings
 set history=700
 set undolevels=700
+set backspace=indent,eol,start " Allow backspace over everything
 
 
 " Real programmers don't use TABs but spaces
@@ -59,19 +65,28 @@ set ignorecase
 set smartcase
 
 
-"" This is the source of spell being broken
-"" Configuration specific to .tex files 
+"" Vim-latex related configuration
+filetype plugin on
+filetype plugin indent on
 augroup latex_ft
-  au!
-  autocmd BufNewFile,BufRead *.tex   set wrap linebreak nolist
-  set spelllang=en
-  set spell
-  let g:Tex_MultipleCompileFormats = 'pdf'
+    au!
+    autocmd BufNewFile,BufRead *.tex   set wrap linebreak nolist
+
+    " auto complete brackets
+    autocmd BufNewFile,BufRead *.tex inoremap ( ()<Esc>i
+    autocmd BufNewFile,BufRead *.tex inoremap [ []<Esc>i
+    autocmd BufNewFile,BufRead *.tex inoremap { {}<Esc>i
+    set spelllang=en
+    set spell
+    let g:Tex_MultipleCompileFormats = 'pdf'
 augroup END
 
 set nospell
 autocmd BufEnter *.tex set spell
 autocmd BufLeave *.tex set nospell
+
+let g:Tex_CustomTemplateDirectory = '/Users/mario/Library/TeXShop/Templates'
+let g:tex_flavor='latex'
 
 tnoremap <Esc> <C-\><C-n>
 " Press ESC twice to stop highlighting after search
@@ -79,16 +94,16 @@ nnoremap <esc><esc> :noh<return>
 
 
 "" Use Ctrl + hjkl to move around the windows
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <C-h> <C-w>h
-"" vim-latex remaps <C-j> to something else. This trick executes after the
-"" plugins are loaded so it doesn't get overriden
-augroup vimrc
-    au!
-    au VimEnter * unmap <C-j>
-    au VimEnter * noremap <C-j> <C-w>j
-augroup END
+" nmap <C-k> <C-w>k
+" nmap <C-l> <C-w>l
+" nmap <C-h> <C-w>h
+" "" vim-latex remaps <C-j> to something else. This trick executes after the
+" "" plugins are loaded so it doesn't get overriden
+" augroup vimrc
+"     au!
+"     au VimEnter * unmap <C-j>
+"     au VimEnter * nnoremap <C-j> <C-w>j
+" augroup END
 
 
 " Better indentation
@@ -103,12 +118,16 @@ call plug#begin('~/.vim/plugged')
 Plug 'tpope/vim-commentary' " There must be an issue with key bindings for this
 Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
-Plug 'davidhalter/jedi-vim'
+Plug 'davidhalter/jedi-vim', {'tag': '0.9.0'}
 Plug 'kien/ctrlp.vim' " Fuzzy search
 "Plug 'Vigemus/nvimux'
 Plug 'vim-latex/vim-latex'
 Plug 'Badacadabra/vim-archery'
 Plug 'nightsense/cosmic_latte'
+Plug 'blueshirts/darcula'
+Plug 'hdima/python-syntax'
+Plug 'nvie/vim-flake8'
+Plug 'christoomey/vim-tmux-navigator'
 
 call plug#end()
 
@@ -119,7 +138,8 @@ map C gcc
 " mkdir -p ~/.vim/colors && cd ~/.vim/colors
 set t_Co=256
 "colorscheme archery
-colorscheme cosmic_latte
+" colorscheme cosmic_latte
+colorscheme darcula
 
 " let g:airline_theme = 'cosmic_latte_dark'
 
@@ -131,6 +151,11 @@ colorscheme cosmic_latte
 
 " vim-powerline
 set laststatus=2
+
+" auto complete brackets
+inoremap ( ()<Esc>i
+inoremap [ []<Esc>i
+inoremap { {}<Esc>i
 
 
 " Settings for ctrlp
@@ -145,15 +170,16 @@ set wildignore+=*/coverage/*
 " Settings for jedi-vim
 " cd ~/.vim/bundle
 " git clone git://github.com/davidhalter/jedi-vim.git
-let g:jedi#usages_command = "<leader>z"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
+let g:jedi#usages_command = "<leader>u"
+" let g:jedi#popup_on_dot = 0
+" let g:jedi#popup_select_first = 0
+
 map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
 
 
 " Better navigating through omnicomplete option list
 " See http://stackoverflow.com/questions/2170023/how-to-map-keys-for-popup-menu-in-vim
-set completeopt=longest,menuone
+" set completeopt=longest,menuone
 function! OmniPopup(action)
     if pumvisible()
         if a:action == 'j'
@@ -174,3 +200,4 @@ inoremap <silent><C-k> <C-R>=OmniPopup('k')<CR>
 " mkdir -p ~/.vim/ftplugin
 " wget -O ~/.vim/ftplugin/python_editing.vim http://www.vim.org/scripts/download_script.php?src_id=5492
 set nofoldenable
+map <space> za

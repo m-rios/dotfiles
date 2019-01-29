@@ -104,8 +104,10 @@ helmdel() {
 }
 
 # Custom Aliases 
-# alias python=python3
-# alias pip=pip3
+#alias python=python3
+alias python=python2
+#alias pip=pip3
+alias pip=pip2
 alias venvc='virtualenv .venv'
 alias venva='source .venv/bin/activate'
 alias vimr="open -a VimR"
@@ -117,6 +119,7 @@ alias ard=arduino
 alias src='source ~/.zshrc'
 alias zshrc='vim ~/.zshrc && src' # TODO: find the name of the shell and automate config filename
 alias vimrc='vim ~/.vim/vimrc' 
+alias tmuxrc='vim ~/.tmux.conf && tmux source-file ~/.tmux.conf'
 alias rn=ranger
 alias sp=spotify
 alias ssh-stt='ssh -i ~/Developer/stt-entrypoint.pem ubuntu@ec2-18-196-186-182.eu-central-1.compute.amazonaws.com'
@@ -124,8 +127,6 @@ alias ssh-anton='ssh -i ~/Developer/wacc_anton.pem ubuntu@ec2-35-158-76-154.eu-c
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias py=python
 alias ci=circleci
-alias dkillall="docker kill $(docker ps -q)"
-alias drmiall="docker rm $(docker ps -aq)"
 #alias k=kubectl
 #alias kg="kubectl get"
 alias compose=docker-compose
