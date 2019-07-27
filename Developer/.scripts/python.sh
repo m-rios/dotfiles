@@ -3,6 +3,7 @@ alias py=python
 alias pip=pip2
 alias venvc='virtualenv .venv'
 alias venva='source .venv/bin/activate'
+alias venvd='deactivate'
 
 export PYTHONSTARTUP=~/.pythonrc
 
