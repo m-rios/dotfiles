@@ -44,6 +44,10 @@ nnoremap <esc><esc> :noh<return> " Press esc twice to disable highlight
 " disable folding
 set nofoldenable
 
+" make focused window slightly wider
+au! winenter * :vertical resize 120<CR>
+
+
 call plug#begin('~/.vim/plugged')
 
 Plug 'tpope/vim-sensible'
@@ -53,6 +57,7 @@ Plug 'vim-airline/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot' " filetype language packs (syntax and indent)
 Plug 'kien/ctrlp.vim' " Fuzzy search
+Plug 'fxn/vim-monochrome' " Monochrome colorscheme
 "Plug 'davidhalter/jedi-vim', {'tag': '0.9.0'} " Python ide
 "Plug 'hdima/python-syntax' " Highlight self in python classes
 "Plug 'nvie/vim-flake8' " Pep8 checks
@@ -60,3 +65,4 @@ Plug 'kien/ctrlp.vim' " Fuzzy search
 call plug#end()
 
 colorscheme darcula
+"colorscheme monochrome
