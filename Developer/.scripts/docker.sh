@@ -10,3 +10,6 @@ alias ros="~/Developer/.scripts/ros"
 alias dc=docker-compose
 alias dcl="dc logs -f"
 alias dcu="dc up -d"
+alias dcub="dcu --build"
+alias dcd="dc down"
+alias docker-prune="docker system prune -a --volumes"
