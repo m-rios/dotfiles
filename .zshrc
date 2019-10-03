@@ -4,6 +4,10 @@ ZSH_THEME=""
 
 source $ZSH/oh-my-zsh.sh
 
+plugins=(
+    osx
+)
+
 # Custom Functions
 function gi() { curl -L -s https://www.gitignore.io/api/$@ ;}
 

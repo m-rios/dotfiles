@@ -7,5 +7,16 @@ alias dbe="${MVP_PATH}/bin/be"
 alias rspec="dbe rspec"
 alias jest="dbe yarn run jest"
 alias rubocop="dbe rubocop -a"
-alias standardjs="${MVP_PATH}/bin/standard"
 alias nuke="drails db:drop && drails db:create && drails db:migrate && drails db:seed"
+
+alias miniserver="python -m SimpleHTTPServer 8000"
+
+update_kb_token() {
+    cp ~/Downloads/artifacts/output/config ~/.kube
+    token=$(cat ~/Downloads/artifacts/gitlab/service_token | tail -n 1 | cut -f 7 -d ' ')
+    echo $token | pbcopy
+    echo $token
+    rm -rf ~/Downloads/artifacts
+}
+
+export PATH=$PATH:$MVP_PATH/bin
