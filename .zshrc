@@ -1,4 +1,4 @@
-export ZSH="/Users/mario/.oh-my-zsh"
+export ZSH="${HOME}/.oh-my-zsh"
 
 ZSH_THEME=""
 
@@ -31,11 +31,12 @@ alias rn=ranger
 alias sp=spotify
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias rng="ranger"
+alias Dev="cd ~/Developer"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 # Custom Variables
-export PATH=$PATH:~/Developer/Scripts:/Users/mario/Library/Python/3.7/bin
+export PATH=$PATH:~/Developer/Scripts:/${HOME}/Library/Python/3.7/bin
 export HOSTALIASES=~/.hosts
 
 if [ -d "$HOME/Developer/bin" ] ; then
