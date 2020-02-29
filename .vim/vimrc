@@ -52,51 +52,52 @@ set exrc
 
 call plug#begin('~/.vim/plugged')
 
-Plug 'tpope/vim-sensible'
+"Plug 'tpope/vim-sensible'
 Plug 'christoomey/vim-tmux-navigator' " C-{h,j,k,l} hotkeys for tmux and vim navigation
-Plug 'blueshirts/darcula' " Jetbrains like colorscheme
+"Plug 'blueshirts/darcula' " Jetbrains like colorscheme
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
 Plug 'sheerun/vim-polyglot' " filetype language packs (syntax and indent)
-Plug 'kien/ctrlp.vim' " Fuzzy search
-Plug 'fxn/vim-monochrome' " Monochrome colorscheme
-Plug 'mattn/emmet-vim' " HTML CSS
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim' " Fuzzy search
+"Plug 'fxn/vim-monochrome' " Monochrome colorscheme
+"Plug 'mattn/emmet-vim' " HTML CSS
 "Plug 'davidhalter/jedi-vim', {'tag': '0.9.0'} " Python ide
 "Plug 'hdima/python-syntax' " Highlight self in python classes
 "Plug 'nvie/vim-flake8' " Pep8 checks
-Plug 'lervag/vimtex' " Latex stuff
+"Plug 'lervag/vimtex' " Latex stuff
 Plug 'dense-analysis/ale' " Linting
 " Following 3 are for autocomplete
-Plug 'Shougo/deoplete.nvim'
-Plug 'roxma/nvim-yarp'
-Plug 'roxma/vim-hug-neovim-rpc'
+"Plug 'Shougo/deoplete.nvim'
+"Plug 'roxma/nvim-yarp'
+"Plug 'roxma/vim-hug-neovim-rpc'
 "Plug 'SirVer/ultisnips' " Snippets engine
 "Plug 'honza/vim-snippets' " Snippets bundle (used by ultisnips)
+Plug 'arcticicestudio/nord-vim'
 call plug#end()
 
 " polyglot uses latexbox, which conflicts with vimlatex
-let g:polyglot_disabled = ['latex']
+"let g:polyglot_disabled = ['latex']
 
-colorscheme darcula
-"colorscheme monochrome
+colorscheme nord
+set termguicolors
 
 " enabling deoplete
-let g:deoplete#enable_at_startup = 1
-let g:deoplete#enable_smart_case = 1
-let g:deoplete#disable_auto_complete = 1
-inoremap <expr> <Tab>  pumvisible() ? "\<C-n>" : deoplete#manual_complete()
-inoremap <expr> <S-Tab>  pumvisible() ? "\<C-p>" : "\<S-Tab>"
+"let g:deoplete#enable_at_startup = 1
+"let g:deoplete#enable_smart_case = 1
+"let g:deoplete#disable_auto_complete = 1
+"inoremap <expr> <Tab>  pumvisible() ? "\<C-n>" : deoplete#manual_complete()
+"inoremap <expr> <S-Tab>  pumvisible() ? "\<C-p>" : "\<S-Tab>"
 
 " enable deoplete for vim
 " This is new style
-call deoplete#custom#var('omni', 'input_patterns', {
-    \ 'tex': g:vimtex#re#deoplete
-    \})
+"call deoplete#custom#var('omni', 'input_patterns', {
+"    \ 'tex': g:vimtex#re#deoplete
+"    \})
 
 " compile latex in a separate directory
-let g:vimtex_compiler_latexmk = {
-    \ 'build_dir' : 'build',
-    \}
+"let g:vimtex_compiler_latexmk = {
+"    \ 'build_dir' : 'build',
+"    \}
 
 " This should be the last line
 set secure " From this point onwards disable unsecure commands (for project specific configurations)

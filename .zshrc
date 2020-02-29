@@ -18,7 +18,7 @@ prompt pure
 
 # Source project/technology specific settings
 EXTENSIONS_PATH="${HOME}/Developer/.scripts/"
-EXTENSIONS_FNS=('credentials' 'docker.sh' 'python.sh' 'researchable.sh' 'msc_thesis.sh' 'rtv.sh' 'transmission.sh' 'el_grupo.sh' 'do.sh' 'misc.sh')
+EXTENSIONS_FNS=('credentials' 'python.sh' 'researchable.sh' 'msc_thesis.sh' 'rtv.sh' 'transmission.sh' 'el_grupo.sh' 'do.sh' 'misc.sh' 'tshark.sh')
 for fn in $EXTENSIONS_FNS; do
     if [ -f $EXTENSIONS_PATH$fn ]; then
         source $EXTENSIONS_PATH$fn
@@ -37,6 +37,7 @@ alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias rng=ranger
 alias Dev="cd ~/Developer"
 alias watch="watch " # Enable alias expansion when using watch
+alias op="passcards --vault ~/Dropbox/1Password/1Password.agilekeychain"
 
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 

@@ -29,7 +29,7 @@ spin-researchable-worker() {
 spin-vpn() {
     curl -X POST -H 'Content-Type: application/json' \
         -H "Authorization: Bearer ${DIGITALOCEAN_ACCESS_TOKEN}" -d \
-        '{"name":"vpn","region":"ams3","size":"s-1vcpu-1gb","image":"openvpn-18-04", "ssh_keys":[25468266]}' \
+        '{"name":"vpn","region":"ams3","size":"s-1vcpu-1gb","image":"openvpn-18-04", "ssh_keys":['"${blink_app_iphone}"']}' \
         "https://api.digitalocean.com/v2/droplets"
 }
 alias dio=doctl
