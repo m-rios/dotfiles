@@ -1,141 +1,82 @@
 "" Source vimrc automatically
 autocmd! bufwritepost ~/.config/nvim/init.vim source %
 
-
 " easier moving between tabs
-map <Leader>h <esc>:tabprevious<CR>
-map <Leader>l <esc>:tabnext<CR>
+map <Leader>n <esc>:tabprevious<CR>
+map <Leader>m <esc>:tabnext<CR>
+map <Leader>t <esc>:tabnew<CR>
 
+" jump to newer position in jumplist (<C-I>/<Tab> is used by coc for
+" completion)
+nnoremap <C-N> g,
 
 " map sort function to a key
 vnoremap <Leader>s :sort<CR>
 
-
-" Show whitespace
-" MUST be inserted BEFORE the colorscheme command
-highlight ExtraWhitespace ctermbg=red guibg=red
-autocmd ColorScheme * highlight ExtraWhitespace ctermbg=red guibg=red
-au InsertLeave * match ExtraWhitespace /\s\+$/
-
-
-" Split to the right
+" Split to the right and bottom
 set splitright
+set splitbelow
 
+" Line number at cursor line and relative numbering for the rest of the lines
+set number
+set relativenumber
+set cursorline
 
-" Enable syntax highlighting
-filetype off
-filetype plugin indent on
-syntax on
-
-
-" Showing line numbers and length
-set number  " show line numbers
-set tw=79   " width of document (used by gd)
-set nowrap  " don't automatically wrap on load
-set fo-=t   " don't automatically wrap text when typing
-set colorcolumn=80
-highlight ColorColumn ctermbg=233
-
-
-" Useful settings
-set history=700
-set undolevels=700
-
-
-" Real programmers don't use TABs but spaces
+"change default indentation
 set tabstop=4
 set softtabstop=4
 set shiftwidth=4
 set shiftround
 set expandtab
 
-
-" Make search case insensitive
-set hlsearch
-set incsearch
-set ignorecase
-set smartcase
-
-
-"" This is the source of spell being broken
-"" Configuration specific to .tex files 
-augroup latex_ft
-  au!
-  autocmd BufNewFile,BufRead *.tex   set wrap linebreak nolist
-  set spelllang=en
-  set spell
-  let g:Tex_MultipleCompileFormats = 'pdf'
-augroup END
-
-set nospell
-autocmd BufEnter *.tex set spell
-autocmd BufLeave *.tex set nospell
-
-tnoremap <Esc> <C-\><C-n>
-" Press ESC twice to stop highlighting after search
-nnoremap <esc><esc> :noh<return>
-
-
-"" Use Ctrl + hjkl to move around the windows
-map <C-k> <C-w>k
-map <C-l> <C-w>l
-map <C-h> <C-w>h
-"" vim-latex remaps <C-j> to something else. This trick executes after the
-"" plugins are loaded so it doesn't get overriden
-augroup vimrc
-    au!
-    au VimEnter * unmap <C-j>
-    au VimEnter * noremap <C-j> <C-w>j
-augroup END
-
-
-" Better indentation
+" Better indentation edition
 vnoremap < <gv
 vnoremap > >gv
 
+" Improved search
+set hlsearch " Keep search highlight once done with search
+set incsearch " Highlight as you type search
+set ignorecase " Ignore case if search string is lowercase
+set smartcase " Don't ignore case if search string has uppercase
+nnoremap <esc><esc> :noh<return> " Press esc twice to disable highlight
 
-" cmd + / to comment
-"xnoremap <C-/> gc
+" Customized netrw
+let g:netrw_banner = 0
+let g:netrw_winsize = 25
+let g:netrw_liststyle = 3
 
-call plug#begin('~/.config/nvim/plugged')
+" enable project-specific features
+set exrc
 
-"Plug 'stevearc/vim-arduino'
-"Plug 'tpope/vim-sensible'
-"Plug 'tpope/commentary' " There must be an issue with key bindings for this
+call plug#begin('~/.vim/plugged')
+Plug 'christoomey/vim-tmux-navigator' " C-{h,j,k,l} hotkeys for tmux and vim navigation
 Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'davidhalter/jedi-vim'
-Plug 'kien/ctrlp.vim' " Fuzzy search
-"Plug 'Vigemus/nvimux'
-Plug 'vim-latex/vim-latex'
-
+Plug 'sheerun/vim-polyglot' " filetype language packs (syntax and indent)
+Plug 'junegunn/fzf', { 'do': './install --bin' }
+Plug 'junegunn/fzf.vim' " Fuzzy search
+"Plug 'dense-analysis/ale' " Linting
+Plug 'arcticicestudio/nord-vim'
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'tpope/vim-commentary'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-surround'
 call plug#end()
 
-" ============================================================================
-" Python IDE Setup
-" ============================================================================
+" polyglot uses latexbox, which conflicts with vimlatex
+"let g:polyglot_disabled = ['latex']
+
+nnoremap <Leader>gf :Files <CR>
+nnoremap <Leader>gb :Buffers <CR>
+nnoremap <C-F> :Ag <CR>
+
+colorscheme nord
+set termguicolors
 
 
-" For python-folding script
-set nofoldenable
+so ~/.config/nvim/coc.vim
 
-" vim-powerline
-set laststatus=2
+autocmd bufnewfile,bufread *.jsx set filetype=javascript.jsx
 
 
-" Settings for ctrlp
-" cd ~/.vim/bundle
-" git clone https://github.com/kien/ctrlp.vim.git
-let g:ctrlp_max_height = 30
-set wildignore+=*.pyc
-set wildignore+=*_build/*
-set wildignore+=*/coverage/*
-
-
-" Settings for jedi-vim
-" cd ~/.vim/bundle
-" git clone git://github.com/davidhalter/jedi-vim.git
-let g:jedi#usages_command = "<leader>z"
-let g:jedi#popup_on_dot = 0
-let g:jedi#popup_select_first = 0
-map <Leader>b Oimport ipdb; ipdb.set_trace() # BREAKPOINT<C-c>
+" This should be the last line
+set secure " From this point onwards disable unsecure commands (for project specific configurations)

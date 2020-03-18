@@ -18,7 +18,7 @@ prompt pure
 
 # Source project/technology specific settings
 EXTENSIONS_PATH="${HOME}/Developer/.scripts/"
-EXTENSIONS_FNS=('credentials' 'python.sh' 'researchable.sh' 'msc_thesis.sh' 'rtv.sh' 'transmission.sh' 'el_grupo.sh' 'do.sh' 'misc.sh' 'tshark.sh')
+EXTENSIONS_FNS=('credentials' 'python.sh' 'researchable.sh' 'msc_thesis.sh' 'rtv.sh' 'transmission.sh' 'el_grupo.sh' 'do.sh' 'misc.sh' 'tshark.sh' 'docker.sh')
 for fn in $EXTENSIONS_FNS; do
     if [ -f $EXTENSIONS_PATH$fn ]; then
         source $EXTENSIONS_PATH$fn
@@ -29,9 +29,9 @@ done
 
 # Custom Aliases
 alias src='source ~/.zshrc'
-alias zshrc='vim ~/.zshrc && src'
-alias vimrc='vim ~/.vim/vimrc'
-alias tmuxrc='vim ~/.tmux.conf && tmux source-file ~/.tmux.conf'
+alias zshrc='nvim ~/.zshrc && src'
+alias vimrc='nvim ~/.config/nvim/init.vim'
+alias tmuxrc='nvim ~/.tmux.conf && tmux source-file ~/.tmux.conf'
 alias sp=spotify
 alias myip='dig +short myip.opendns.com @resolver1.opendns.com'
 alias rng=ranger
