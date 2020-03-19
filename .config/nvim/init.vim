@@ -73,7 +73,7 @@ colorscheme nord
 set termguicolors
 
 
-so ~/.config/nvim/coc.vim
+" so ~/.config/nvim/coc.vim
 
 autocmd bufnewfile,bufread *.jsx set filetype=javascript.jsx
 

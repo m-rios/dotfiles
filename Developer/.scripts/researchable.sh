@@ -1,5 +1,5 @@
 # Researchable
-MVP_PATH="/Users/mario/Developer/Researchable/MVP/base-platform"
+MVP_PATH="${HOME}/Developer/base-platform"
 alias mvp="cd ${MVP_PATH}"
 alias drails="${MVP_PATH}/bin/be rails"
 alias dbundle="${MVP_PATH}/bin/bundle"
