@@ -1,26 +1,23 @@
 "" Source vimrc automatically
-autocmd! bufwritepost ~/.config/nvim/init.vim source %
-
-" easier moving between tabs
-map <Leader>n <esc>:tabprevious<CR>
-map <Leader>m <esc>:tabnext<CR>
-map <Leader>t <esc>:tabnew<CR>
+" autocmd! bufwritepost ~/.config/nvim/init.vim source %
 
 " jump to newer position in jumplist (<C-I>/<Tab> is used by coc for
 " completion)
 nnoremap <C-N> g,
 
-" map sort function to a key
-vnoremap <Leader>s :sort<CR>
-
 " Split to the right and bottom
 set splitright
 set splitbelow
 
+" Set focused window to 70%
+autocmd WinEnter * execute &columns * 8 / 10 . 'wincmd |' 
+:au FocusLost * silent! wa
+
 " Line number at cursor line and relative numbering for the rest of the lines
 set number
-set relativenumber
-set cursorline
+" set relativenumber " Affects performance when scrolling
+set cursorline " Affects performance when scrolling
+set colorcolumn=120 " Vertical line
 
 "change default indentation
 set tabstop=4
@@ -60,6 +57,11 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'tpope/vim-commentary'
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-surround'
+Plug 'airblade/vim-gitgutter' " Show git modifications in the gutter
+Plug 'xolox/vim-misc'
+Plug 'xolox/vim-notes'
+Plug 'preservim/nerdtree'
+Plug 'kkoomen/vim-doge' " DOcumentation GEnerator (docstring plugin)
 call plug#end()
 
 " polyglot uses latexbox, which conflicts with vimlatex
@@ -69,11 +71,12 @@ nnoremap <Leader>gf :Files <CR>
 nnoremap <Leader>gb :Buffers <CR>
 nnoremap <C-F> :Ag <CR>
 
+nnoremap <F2> :NERDTreeToggle<CR>
 colorscheme nord
-set termguicolors
+" set termguicolors
 
 
-" so ~/.config/nvim/coc.vim
+so ~/.config/nvim/coc.vim
 
 autocmd bufnewfile,bufread *.jsx set filetype=javascript.jsx
 

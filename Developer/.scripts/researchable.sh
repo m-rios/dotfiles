@@ -8,6 +8,7 @@ alias rspec="dbe rspec"
 alias jest="dbe yarn run jest"
 alias rubocop="dbe rubocop -a"
 alias nuke="drails db:drop && drails db:create && drails db:migrate && drails db:seed"
+alias kmaster="kubectl -n=sdv-mvp-master"
 
 alias miniserver="python -m SimpleHTTPServer 8000"
 
@@ -17,6 +18,10 @@ update_kb_token() {
     echo $token | pbcopy
     echo $token
     rm -rf ~/Downloads/artifacts
+}
+
+kmaster-bash() {
+  kmaster exec -it $1 -- /bin/bash
 }
 
 export PATH=$PATH:$MVP_PATH/bin
