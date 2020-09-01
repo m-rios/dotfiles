@@ -9,6 +9,7 @@ alias jest="dbe yarn run jest"
 alias rubocop="dbe rubocop -a"
 alias nuke="drails db:drop && drails db:create && drails db:migrate && drails db:seed"
 alias kmaster="kubectl -n=sdv-mvp-master"
+alias kdevelop="kubectl -n=sdv-mvp-develop"
 
 alias miniserver="python -m SimpleHTTPServer 8000"
 
@@ -22,6 +23,20 @@ update_kb_token() {
 
 kmaster-bash() {
   kmaster exec -it $1 -- /bin/bash
+}
+
+get-base-pods() {
+    case $1 in
+        develop)
+            kdevelop get pods -l app=base-platform | grep -v worker | tail -n +2 | cut -d' ' -f1
+            ;;
+        master)
+            kmaster get pods -l app=base-platform | grep -v worker | tail -n +2 | cut -d' ' -f1
+            ;;
+        *)
+            echo 'Must be either develop or master'
+            ;;
+    esac
 }
 
 export PATH=$PATH:$MVP_PATH/bin
