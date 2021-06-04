@@ -3,7 +3,7 @@ docker-bash() {
 }
 
 alias ros="~/Developer/.scripts/ros"
-alias dc="docker-compose -f $HOME/Developer/base-platform/docker-compose.yml"
+alias dc=docker-compose
 alias dcl="dc logs -f --tail=100"
 alias dcu="dc up -d"
 alias dcub="dcu --build"

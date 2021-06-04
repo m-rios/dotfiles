@@ -10,8 +10,8 @@ set splitright
 set splitbelow
 
 " Set focused window to 70%
-autocmd WinEnter * execute &columns * 8 / 10 . 'wincmd |' 
-:au FocusLost * silent! wa
+" autocmd WinEnter * execute &columns * 8 / 10 . 'wincmd |' 
+" :au FocusLost * silent! wa
 
 " Line number at cursor line and relative numbering for the rest of the lines
 set number
@@ -20,9 +20,9 @@ set cursorline " Affects performance when scrolling
 set colorcolumn=120 " Vertical line
 
 "change default indentation
-set tabstop=4
-set softtabstop=4
-set shiftwidth=4
+set tabstop=2
+set softtabstop=2
+set shiftwidth=2
 set shiftround
 set expandtab
 
@@ -38,9 +38,9 @@ set smartcase " Don't ignore case if search string has uppercase
 nnoremap <esc><esc> :noh<return> " Press esc twice to disable highlight
 
 " Customized netrw
-let g:netrw_banner = 0
-let g:netrw_winsize = 25
-let g:netrw_liststyle = 3
+" let g:netrw_banner = 0
+" let g:netrw_winsize = 25
+" let g:netrw_liststyle = 3
 
 " enable project-specific features
 set exrc
@@ -62,18 +62,27 @@ Plug 'xolox/vim-misc'
 Plug 'xolox/vim-notes'
 Plug 'preservim/nerdtree'
 Plug 'kkoomen/vim-doge' " DOcumentation GEnerator (docstring plugin)
+Plug '907th/vim-auto-save'
 call plug#end()
 
 " polyglot uses latexbox, which conflicts with vimlatex
 "let g:polyglot_disabled = ['latex']
 
-nnoremap <Leader>gf :Files <CR>
+let g:auto_save = 1  " enable AutoSave on Vim startup
+
+" Find files not in .gitignore
+nnoremap <Leader>gf :GFiles <CR>
+" nnoremap <C-S-F> :Files <CR>
 nnoremap <Leader>gb :Buffers <CR>
 nnoremap <C-F> :Ag <CR>
 
-nnoremap <F2> :NERDTreeToggle<CR>
+" Open NERDTree at the current file location
+nnoremap <F2> :NERDTreeToggle %<CR>
 colorscheme nord
 " set termguicolors
+
+" Vim notes directory
+"let g:notes_directory = ['~/Documents/notes']
 
 
 so ~/.config/nvim/coc.vim
